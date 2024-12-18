@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 
+st.write('# Ranking Anaysis')
+
 @st.cache_data
 def load_data():
     return pd.read_csv("movies_complete.csv", parse_dates= ["release_date"])

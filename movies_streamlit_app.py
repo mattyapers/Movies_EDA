@@ -4,27 +4,24 @@ import streamlit as st
 from IPython.display import HTML
 import re
 
-# Show the page title and description.
-st.set_page_config(page_title="Movies dataset", page_icon="🎬")
-st.title("🎬 Movies dataset")
-st.write(
-    """
-    This app visualizes data from the Movie Database.
-    It shows which movie genre performed best at the box office over the years. 
-    Click on the widgets below to explore!
-    """
-)
+# Page configuration
+st.set_page_config(page_title="Movies Dataset Analysis", page_icon="🎥", layout="wide")
 
-
-# Load the data from a CSV with caching.
+# Load the dataset with caching
 @st.cache_data
 def load_data():
-    df = pd.read_csv("movies_complete.csv", parse_dates= ["release_date"])
+    df = pd.read_csv("movies_complete.csv", parse_dates=["release_date"])
     return df
 
-# Load the data
+# Load the dataset
 df = load_data()
 
+# Title and introduction
+st.title("🎥 Movies Dataset Analysis")
+st.write("""
+Welcome to the Movies Dataset Analysis app! This application explores trends, correlations, and patterns 
+in the movies dataset. Dive into revenue performance, genre analysis, and other movie-related metrics.
+""")
 # Display the first 5 rows of the dataset
 st.write("### Preview of the Dataset")
 st.write(df.head(5))
