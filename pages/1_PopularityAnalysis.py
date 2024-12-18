@@ -33,20 +33,18 @@ if selected_genres:
 else:
     st.write("Select genres to view their trends.")
 
+
 # Actor Popularity Over Time
 st.header("🎭 Popularity of Actors Over Time")
 
 # Explode 'cast' column to create individual rows for each actor
 actor_data = df['cast'].str.split('|').explode()
 
-# Count appearances of each actor
-actor_counts = actor_data.value_counts().reset_index()
-actor_counts.columns = ['Actor', 'Count']  # Rename columns
-
 # Get the complete list of unique actors
-all_actors = sorted(actor_data.unique())  # actor_data is the exploded 'cast' column
+all_actors = sorted([actor for actor in actor_data.dropna().unique() if isinstance(actor, str)])
 
-# Allow user to select multiple actors from all available actors
+
+# Allow user to select multiple actors
 selected_actors = st.multiselect(
     "Select Actors", options=all_actors, default=None, placeholder="Type to search for actors..."
 )
