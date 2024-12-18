@@ -43,15 +43,13 @@ actor_data = df['cast'].str.split('|').explode()
 actor_counts = actor_data.value_counts().reset_index()
 actor_counts.columns = ['Actor', 'Count']  # Rename columns
 
-# Select multiple actors
-top_actors = actor_counts['Actor'].head(50).tolist()  # Top 50 most frequent actors
-selected_actors = st.multiselect(
-    "Select Actors", options=top_actors, default=None, placeholder="Type to search for actors..."
-)
+# Get the complete list of unique actors
+all_actors = sorted(actor_data.unique())  # actor_data is the exploded 'cast' column
 
-# # Select top actors based on appearances
-# top_actors = actor_counts['Actor'].head(10).tolist()
-# selected_actor = st.selectbox("Select an Actor", options=top_actors)
+# Allow user to select multiple actors from all available actors
+selected_actors = st.multiselect(
+    "Select Actors", options=all_actors, default=None, placeholder="Type to search for actors..."
+)
 
 # Filter data for the selected actors
 if selected_actors:
