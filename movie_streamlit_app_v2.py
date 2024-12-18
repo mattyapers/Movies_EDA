@@ -19,11 +19,24 @@ def get_unique_genres(genre_column):
     unique_genres = set(genre for sublist in genre_lists for genre in sublist)
     return sorted(unique_genres)
 
-# Function to filter the DataFrame based on selected genres
-def filter_by_genres(df, selected_genres):
-    if selected_genres:
+# Function to filter the DataFrame based on selected genres and selected actors
+def filter_by_genres_and_actors(df, selected_genres, selected_actors):
+    if selected_genres and selected_actors:
+        return df[
+            df['genres'].fillna('').apply(lambda x: all(genre in x for genre in selected_genres)) &
+            df['cast'].fillna('').apply(lambda x: all(actor in x for actor in selected_actors))
+        ]
+    elif selected_genres:
         return df[df['genres'].fillna('').apply(lambda x: all(genre in x for genre in selected_genres))]
+    elif selected_actors:
+        return df[df['cast'].fillna('').apply(lambda x: all(actor in x for actor in selected_actors))]
     return df
+
+# Function to filter the DataFrame based on selected actors
+def get_unique_actors(actor_column):
+    actor_lists = actor_column.dropna().str.split("|")
+    unique_actors = set(actor for sublist in actor_lists for actor in sublist)
+    return sorted(unique_actors)
 
 # Function to extract the URL from the img tag
 def extract_image_url(img_tag):
@@ -41,6 +54,11 @@ unique_genres = get_unique_genres(df['genres'])
 selected_genres = st.sidebar.multiselect(
     "Select Genres", options=unique_genres, default=None, placeholder="Type to search for genres..."
 )
+
+unique_actors = get_unique_actors(df['cast'])
+selected_actors = st.sidebar.multiselect(
+    "Select Actors", options=unique_actors, default=None, placeholder="Type to search for actors..."
+)
 start_year, end_year = st.sidebar.slider(
     "Select Release Year Range",
     min_value=int(df["release_date"].dt.year.min()),
@@ -50,7 +68,7 @@ start_year, end_year = st.sidebar.slider(
 
 # Apply filters
 filtered_df = df.copy()
-filtered_df = filter_by_genres(filtered_df, selected_genres)
+filtered_df = filter_by_genres_and_actors(filtered_df, selected_genres,selected_actors)
 filtered_df = filtered_df[
     (filtered_df["release_date"].dt.year >= start_year) &
     (filtered_df["release_date"].dt.year <= end_year)
