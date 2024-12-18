@@ -15,6 +15,7 @@ st.write(
     """
 )
 
+
 # Load the data from a CSV with caching.
 @st.cache_data
 def load_data():
@@ -55,15 +56,6 @@ selected_genres = st.multiselect(
     placeholder="Type to search for a genre..."
 )
 
-# # Filter the DataFrame based on selected genres
-# if selected_genres:
-#     # Drop NaN or replace them with empty strings before applying the check
-#     filtered_df = df[df['genres'].fillna('').apply(lambda x: any(genre in x for genre in selected_genres))]
-    
-#     st.write(f"Movies matching genres: {', '.join(selected_genres)}")
-#     st.dataframe(filtered_df[['title', 'genres']].head(20)) # Show first 20 results
-# else:
-#     st.write("No genres selected. Please choose from the list.")
 
 
 # Filter the DataFrame based on selected genres
@@ -88,49 +80,3 @@ if selected_genres:
         st.write("---")  # Add a separator
 else:
     st.write("No genres selected. Please choose from the list.")
-
-
-
-# Show the Movies that contain that genre
-
-
-# # Show a multiselect widget with the genres using `st.multiselect`.
-# genres = st.multiselect(
-#     "Genre",
-#     df['.genres.unique(),
-#     ["Action", "Adventure", "Biography", "Comedy", "Drama", "Horror"]'],
-# )
-
-# # Show a slider widget with the years using `st.slider`.
-# years = st.slider("Years", 1986, 2006, (2000, 2016))
-
-# # Filter the dataframe based on the widget input and reshape it.
-# df_filtered = df[(df["genres"].isin(genres)) & (df["year"].between(years[0], years[1]))]
-# df_reshaped = df_filtered.pivot_table(
-#     index="year", columns="genre", values="gross", aggfunc="sum", fill_value=0
-# )
-# df_reshaped = df_reshaped.sort_values(by="year", ascending=False)
-
-
-# # Display the data as a table using `st.dataframe`.
-# st.dataframe(
-#     df_reshaped,
-#     use_container_width=True,
-#     column_config={"year": st.column_config.TextColumn("Year")},
-# )
-
-# # Display the data as an Altair chart using `st.altair_chart`.
-# df_chart = pd.melt(
-#     df_reshaped.reset_index(), id_vars="year", var_name="genre", value_name="gross"
-# )
-# chart = (
-#     alt.Chart(df_chart)
-#     .mark_line()
-#     .encode(
-#         x=alt.X("year:N", title="Year"),
-#         y=alt.Y("gross:Q", title="Gross earnings ($)"),
-#         color="genre:N",
-#     )
-#     .properties(height=320)
-# )
-# st.altair_chart(chart, use_container_width=True)
