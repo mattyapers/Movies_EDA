@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 
+st.title("📊 Popularity Analysis")
+
 # Load dataset
 @st.cache_data
 def load_data(filepath):
