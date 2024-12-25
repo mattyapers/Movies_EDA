@@ -1,10 +1,91 @@
 import streamlit as st
 
-# Page configuration for main entry point
-st.set_page_config(page_title="TMDB Movie Dataset", page_icon="🎬")
-st.title("Welcome to TMDB Movie Dataset Dashboard!")
-st.write("This dashboard provides insights into the movie dataset, which includes information on revenue, budget, genre, language, and more. Data obtained from https://www.kaggle.com/datasets/asaniczka/tmdb-movies-dataset-2023-930k-movies, cleaned by me!" )
-st.write("*New Dataset contains 897382 entries")
-st.write("Use the sidebar to navigate between pages.")
+# Set page configuration
+st.set_page_config(
+    page_title="Welcome to TMDB Movie Dataset Dashboard!",
+    page_icon="🎬",
+    layout="centered"
+)
 
+# Page title and subtitle
+st.title("🎥 Welcome to the TMDB Movie Dataset Dashboard!")
+st.markdown(
+    """
+    <style>
+        .main-title {
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .sub-title {
+            font-size: 18px;
+            color: #555;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .description {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .nav-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: #4CAF50;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .nav-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
+# Description
+st.markdown(
+    """
+    <div class="sub-title">Explore insightful trends and analytics from the TMDB Movie Dataset!</div>
+    <div class="description">
+        This dashboard allows you to interact with data on movie revenue, budget, genres, and much more.
+        Use the sidebar to navigate between static and dynamic insights.
+        *New Dataset contains 897382 entries*
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+# Add a banner image or GIF
+st.image(
+    "https://media.giphy.com/media/3o7aD4pGeYdyt3Ph7S/giphy.gif",
+    use_column_width=True
+)
+
+# Add navigation buttons
+st.markdown(
+    """
+    <div style="text-align: center;">
+        <a class="nav-button" href="/1_Static_Insights">Static Insights 📊</a>
+        <a class="nav-button" href="/1_Dynamic_Insights">Dynamic Insights 📈</a>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+# Footer with acknowledgments
+st.markdown(
+    """
+    <hr>
+    <div style="text-align: center; font-size: 14px; color: #555;">
+        Data Source: <a href="https://www.kaggle.com/datasets/asaniczka/tmdb-movies-dataset-2023-930k-movies" target="_blank">Kaggle</a><br>
+        Dashboard created with ❤️ using Streamlit
+    </div>
+    """,
+    unsafe_allow_html=True
+)
