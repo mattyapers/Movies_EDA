@@ -67,17 +67,6 @@ st.image(
     use_container_width=True
 )
 
-# Add navigation buttons
-st.markdown(
-    """
-    <div style="text-align: center;">
-        <a class="nav-button" href="/1_Static_Insights">Static Insights 📊</a>
-        <a class="nav-button" href="/1_Dynamic_Insights">Dynamic Insights 📈</a>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
 # Footer with acknowledgments
 st.markdown(
     """
