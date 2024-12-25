@@ -26,7 +26,7 @@ def show_static_insights():
     # Top 10 Highest Production Countries
     st.subheader('All-Time Top 10 Highest Production Countries')
     top_countries = df.explode('production_countries').groupby('production_countries').size().reset_index(name='movie_count')
-    top_countries = top_countries.nlargest(10, 'movie_count')
+    top_countries = top_countries.nlargest(10, 'movie_count').sort_values(by='movie_count')
 
     countries_chart = alt.Chart(top_countries).mark_bar().encode(
         x=alt.X('movie_count:Q', title='Movie Count'),
@@ -45,7 +45,7 @@ def show_static_insights():
     # Top 10 Highest Genres
     st.subheader('All-Time Top 10 Highest Genres')
     top_genres = df.explode('genres').groupby('genres').size().reset_index(name='genre_count')
-    top_genres = top_genres.nlargest(10, 'genre_count')
+    top_genres = top_genres.nlargest(10, 'genre_count').sort_values(by='genre_count')
 
     genres_chart = alt.Chart(top_genres).mark_bar().encode(
         x=alt.X('genre_count:Q', title='Genre Count'),
@@ -64,7 +64,7 @@ def show_static_insights():
     # Top 10 Highest Original Languages
     st.subheader('All-Time Top 10 Highest Original Languages')
     top_languages = df.groupby('original_language').size().reset_index(name='language_count')
-    top_languages = top_languages.nlargest(10, 'language_count')
+    top_languages = top_languages.nlargest(10, 'language_count').sort_values(by='language_count')
 
     languages_chart = alt.Chart(top_languages).mark_bar().encode(
         x=alt.X('language_count:Q', title='Language Count'),
@@ -82,7 +82,7 @@ def show_static_insights():
 
     # Top 10 Highest Popularity
     st.subheader('All-Time Top 10 Highest Popularity Movies')
-    top_popularity = df.nlargest(10, 'popularity')[['title', 'popularity']]
+    top_popularity = df.nlargest(10, 'popularity')[['title', 'popularity']].sort_values(by='popularity')
 
     popularity_chart = alt.Chart(top_popularity).mark_bar().encode(
         x=alt.X('popularity:Q', title='Popularity'),
@@ -103,11 +103,11 @@ def show_static_insights():
     # Average Budget and Revenue by Genre
     st.subheader('Average Budget and Revenue by Genre')
     avg_budget_revenue = df.explode('genres').groupby('genres')[['budget_musd', 'revenue_musd']].mean().reset_index()
-    avg_budget_revenue = avg_budget_revenue.sort_values(by='revenue_musd', ascending=False)
+    avg_budget_revenue = avg_budget_revenue.sort_values(by='budget_musd', ascending=False)
 
     budget_revenue_chart = alt.Chart(avg_budget_revenue).mark_bar().encode(
         x=alt.X('genres:N', title='Genre'),
-        y=alt.Y('revenue_musd:Q', title='Revenue (in million USD)'),
+        y=alt.Y('revenue_musd:Q', title='Average Revenue (in million USD)'),
         color='genres:N'
     ).properties(
         title="Average Revenue by Genre",
@@ -121,7 +121,7 @@ def show_static_insights():
 
     # Top 10 Movies by Profit
     st.subheader('All-Time Top 10 Highest Profit Movies')
-    top_profit_movies = df.nlargest(10, 'profit_musd')[['title', 'profit_musd']]
+    top_profit_movies = df.nlargest(10, 'profit_musd')[['title', 'profit_musd']].sort_values(by='profit_musd', ascending=False)
 
     profit_chart = alt.Chart(top_profit_movies).mark_bar().encode(
         x=alt.X('profit_musd:Q', title='Profit (in million USD)'),
