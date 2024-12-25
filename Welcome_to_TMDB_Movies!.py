@@ -63,8 +63,8 @@ st.markdown(
 
 # Add a banner image or GIF
 st.image(
-    "https://media.giphy.com/media/3o7aD4pGeYdyt3Ph7S/giphy.gif",
-    use_column_width=True
+    "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExanBzMW1hbHViemhieWFnOHFxcG5rb3Q4b3BxZXRpaXFrcjl0ZGZhMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/8Iv5lqKwKsZ2g/giphy.gif",
+    use_container_width=True
 )
 
 # Add navigation buttons
