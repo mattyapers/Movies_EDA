@@ -3,6 +3,9 @@
 ## 📖 **About the Project**
 This project explores the TMDB dataset, uncovering insights about movies' financial and popularity metrics. The interactive dashboard allows users to dynamically explore trends and relationships in the dataset.
 
+### **Source**
+- [Kaggle](https://www.kaggle.com/datasets/asaniczka/tmdb-movies-dataset-2023-930k-movies)
+
 ---
 
 ## 📂 **Dataset Overview**
