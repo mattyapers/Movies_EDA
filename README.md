@@ -5,6 +5,8 @@ This project explores the TMDB dataset, uncovering insights about movies' financ
 
 ### **Source**
 - [Kaggle](https://www.kaggle.com/datasets/asaniczka/tmdb-movies-dataset-2023-930k-movies)
+### ** View the Dashboard Here!**
+- https://movie-testing-yapmatt.streamlit.app/
 
 ---
 
